@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <input id="file-input" type="file"><br><br><br>
+    <span class="labels">BPM</span>
+    <span><button id="tap">Tap</button></span>
+    <input id="bpm" type="number" value="110"><br><br>
+    <span class="labels">Subdivision</span>
+    <input id="sub" type="range" min="1" max="16" value="1" class="slider">
+    <span id="subValue">1</span><br><br><br>
+  <select id="chunkFunc" >
+      <option value="random" selected>Random</option>
+      <option value="randomReverse">Random Reverse</option>
+      <option value="randomStereoUnlinked">Random Stereo Unlinked</option>
+      <option value="chaos">Chaos</option>
+  </select>  
+  <button id="scramble">Scramble</button><br><br><br>
+  <button id="playOriginal">Play Original</button>  
+  <button id="playNew">Play Scrambled</button>
+  <button id="stop">Stop</button>
+
+</body>
+</html>
+
+<script src="scramble.js"></script>
