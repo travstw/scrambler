@@ -131,10 +131,10 @@ function chaos(ch0, ch1) {
     
     const channel0 = [];
     const channel1 = [];
-    let frameSize = Math.floor((Math.random() * ((samplesPerMeasure * 4) - samplesPerMeasure/16)) + samplesPerMeasure/16);
+    let frameSize = Math.floor((Math.random() * ((samplesPerMeasure * 4) - samplesPerMeasure/64)) + samplesPerMeasure/64);
 
     for (let i = 0; i < length; i += frameSize) {
-        frameSize = Math.floor((Math.random() * ((samplesPerMeasure * 4) - samplesPerMeasure/16)) + samplesPerMeasure/16);
+        frameSize = Math.floor((Math.random() * ((samplesPerMeasure * 4) - samplesPerMeasure/64)) + samplesPerMeasure/64);
         let frame;
         const numRemainingSamps = length - i; 
         if (numRemainingSamps < frameSize) {
@@ -185,6 +185,51 @@ function setTapTempo(tap) {
     setBpm(newBpm);
 }
 
+function getSubdivision(value) {
+    console.log(value);
+    const division = {};
+    let subVal;
+    let subLabel;
+
+    switch(value) {
+        case '1':
+            subLabel = '1/1';
+            subVal = 1;
+            break;
+        case '2':
+            subLabel = '1/2';
+            subVal =  2;
+            break;
+        case '3':
+            subLabel = '1/4';
+            subVal = 4;
+            break;
+        case '4':
+            subLabel = '1/8';
+            subVal = 8;
+            break;
+        case '5':
+            subLabel = '1/16';
+            subVal = 16;
+            break;
+        case '6':
+            subLabel = '1/32';
+            subVal = 32;
+            break;
+        case '7':
+            subLabel = '1/64';
+            subVal = 64;
+            break;
+    }
+
+    return Object.assign(division, {
+        subLabel, 
+        subVal
+    });
+
+}
+
+
 function setBpm(val) {
     bpm = val;
     document.getElementById('bpm').value = bpm;
@@ -205,8 +250,10 @@ function stopAll() {
     
     const subValue = document.getElementById('subValue');
     document.getElementById('sub').addEventListener('input', function() {
-        subValue.innerHTML = this.value;
-        subDivision = parseInt(this.value);
+        let sub = getSubdivision(this.value);
+        console.log(sub.subLabel, sub.subVal);
+        subValue.innerHTML = sub.subLabel;
+        subDivision = sub.subVal;
     });
     
     document.getElementById('scramble').addEventListener('click', () => {
