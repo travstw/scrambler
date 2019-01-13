@@ -176,10 +176,12 @@ function setTapTempo(tap) {
     for (let i = 0; i < taps.length; i++) {
         if (i > 0) {
             diffs.push(taps[i] - taps[i - 1]);
-            total += taps[i] - taps[i - 1];
+            total += (taps[i] - taps[i - 1]);
         }
     } 
-    newBpm = Math.floor(60000 / (total/taps.length));
+
+    newBpm = Math.floor(60000 / (total/diffs.length));
+
     setBpm(newBpm);
 }
 
