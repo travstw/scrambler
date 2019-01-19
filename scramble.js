@@ -258,6 +258,7 @@ function stopAll() {
     
     document.getElementById('scramble').addEventListener('click', () => {
         if (originalSource) {
+            stopAll();
             scramble(selectedChunkFn);
         }  
     });
