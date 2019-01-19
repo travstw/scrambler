@@ -11,6 +11,7 @@ let chunks = [];
 let playing = [];
 let taps = [];
 let selectedChunkFn = straightChunks;
+const scrambled = document.getElementById('scrambled');
 
 
 function setOriginalSource(buffer) {
@@ -30,6 +31,7 @@ function resetBuffers(currentSource) {
 }
 
 function scramble(chunkFn, sortFn) {
+    scrambled.innerHTML = 'Scrambling...';
     createAudioChunks(chunkFn)
     const scrambledChunks = chunks.sort(sortFn || randomSort);
     const scrambledBuffer = ctx.createBuffer(2, length, ctx.sampleRate);
@@ -47,6 +49,7 @@ function scramble(chunkFn, sortFn) {
     newSource.buffer = scrambledBuffer
     newSource.connect(ctx.destination);
     console.log('scramble complete');
+    scrambled.innerHTML = 'Scrambled.';
 }
 
 function createAudioChunks(chunkFn) {
