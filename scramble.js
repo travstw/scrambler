@@ -12,6 +12,7 @@ let playing = [];
 let taps = [];
 let selectedChunkFn = straightChunks;
 const scrambled = document.getElementById('scrambled');
+const loaded = document.getElementById('load-status');
 
 function loadSample() {
     const myRequest = new Request('assets/ace.mp3');
@@ -24,10 +25,12 @@ function loadSample() {
 }
 
 function setOriginalSource(buffer) {
+    loaded.innerHTML = 'Loading...'
     ctx.decodeAudioData(buffer)
         .then(decodedData => {
             originalSource = ctx.createBufferSource();
             originalSource.buffer = decodedData;
+            loaded.innerHTML = 'File loaded';
             console.log('Original source decoded');
         });
 }
