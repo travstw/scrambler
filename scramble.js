@@ -2,9 +2,8 @@ const ctx = new AudioContext();
 let originalSource;
 let originalSourcePlaying = false;
 let newSource;
-let newSourcePlaying = false;
 let subDivision = 1;
-let bpm = 110;
+let bpm = 141;
 let samplesPerMeasure = Math.floor(44100 * 60 / bpm) * 4;
 let length;
 let chunks = [];
@@ -17,9 +16,9 @@ const loaded = document.getElementById('load-status');
 function loadSample() {
     const myRequest = new Request('assets/ace.mp3');
 
-    fetch(myRequest).then(function(response) {
+    fetch(myRequest).then(response => {
         return response.arrayBuffer();
-    }).then(function(buffer) {
+    }).then(buffer => {
        setOriginalSource(buffer);
     });
 }
@@ -200,7 +199,6 @@ function setTapTempo(tap) {
 }
 
 function getSubdivision(value) {
-    console.log(value);
     const division = {};
     let subVal;
     let subLabel;
