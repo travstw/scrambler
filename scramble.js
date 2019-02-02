@@ -13,6 +13,15 @@ let taps = [];
 let selectedChunkFn = straightChunks;
 const scrambled = document.getElementById('scrambled');
 
+function loadSample() {
+    const myRequest = new Request('assets/ace.mp3');
+
+    fetch(myRequest).then(function(response) {
+        return response.arrayBuffer();
+    }).then(function(buffer) {
+       setOriginalSource(buffer);
+    });
+}
 
 function setOriginalSource(buffer) {
     ctx.decodeAudioData(buffer)
@@ -48,7 +57,6 @@ function scramble(chunkFn, sortFn) {
     newSource = ctx.createBufferSource();
     newSource.buffer = scrambledBuffer
     newSource.connect(ctx.destination);
-    console.log('scramble complete');
     scrambled.innerHTML = 'Scrambled.';
 }
 
@@ -247,6 +255,10 @@ function stopAll() {
 }
 
 (function setEventHandlers() {
+    document.getElementById('load').addEventListener('click', () => {
+        loadSample();
+    });
+
     document.getElementById('file-input').addEventListener('change', function(){
         handleFile(this.files[0]);
     });
